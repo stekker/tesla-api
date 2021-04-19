@@ -99,7 +99,9 @@ module TeslaApi
           "credential" => password
         )),
         "Cookie" => cookie
-      )
+      ) do |request|
+        request.headers["Content-Type"] = "application/x-www-form-urlencoded"
+      end
 
       if response.body.match?(/passcode/)
         raise MFARequired if mfa_code.nil?
