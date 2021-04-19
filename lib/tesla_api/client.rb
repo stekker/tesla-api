@@ -37,7 +37,7 @@ module TeslaApi
         conn.response :json
         conn.response :raise_error
         conn.request :retry, retry_options if retry_options # Must be registered after :raise_error
-        conn.adapter Faraday.default_adapter
+        conn.adapter :excon
       }
     end
 
@@ -64,6 +64,7 @@ module TeslaApi
 
       sso_api = Faraday.new(@sso_uri + "/oauth2/v3") { |conn|
         # conn.response :logger, nil, {headers: true, bodies: true}
+        conn.adapter :excon
       }
 
       response = sso_api.get(
