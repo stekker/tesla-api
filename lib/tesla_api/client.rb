@@ -37,7 +37,6 @@ module TeslaApi
         conn.response :json
         conn.response :raise_error
         conn.request :retry, retry_options if retry_options # Must be registered after :raise_error
-        conn.adapter :excon
       }
     end
 
